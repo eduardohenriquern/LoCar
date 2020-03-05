@@ -27,9 +27,10 @@ public class Locadora {
 	public void realizarReserva(Veiculo veiculo, Cliente cliente, String dataLoc, String dataDev) throws VeiculoReservadoException{
 
 		if(verificarDisponibilidade(veiculo)) {
-
+			
 			Reserva reserva = new Reserva(veiculo, cliente, dataLoc, dataDev);
 			this.reservas.add(reserva);
+			
 			System.out.println("Veículo " + veiculo.getNome() +" de placa "
 					+veiculo.getPlaca()+" reservado por "+ cliente.getNome()+"\n");
 
@@ -39,6 +40,7 @@ public class Locadora {
 		}
 	}
 
+	
 	/**
 	 * Este método finaliza uma reserva recebendo como parâmetros a
 	 * reserva que será finalizada e a data de entreda do veículo.
@@ -51,6 +53,7 @@ public class Locadora {
 		String dataDev = res.getDataDevolucao();
 
 		if (verificarSeEntregouComAtraso(dataDev, dataEnt)) {
+			
 			System.out.println(res.getCliente().getNome() + " entregou o veículo "+
 					res.getVeiculo().getNome() + " com atraso!");
 			
@@ -67,6 +70,7 @@ public class Locadora {
 		this.reservas.remove(res);
 	}
 
+	
 	/**
 	 * Este método calcula a multa pelo atraso de locação considerando
 	 * os dias de atraso e o preço de locação do veículo.
@@ -74,6 +78,7 @@ public class Locadora {
 	 * @return multa
 	 */
 	public double calcularMulta(Reserva res, int diasAtraso) {
+		
 		double multa;
 		if(res.getVeiculo().getModelo().equals(Modelo.HATCH)) {
 			multa = getPrecoDiarioHatch() + ((getPrecoDiarioHatch() * this.porcentagemMulta) * diasAtraso);
@@ -84,6 +89,7 @@ public class Locadora {
 		return multa;
 	}
 
+	
 	/**
 	 * Este método verifica se o veículo foi entregue com atraso 
 	 * @param dataDev
@@ -105,6 +111,7 @@ public class Locadora {
 		} 
 	} 
 
+	
 	/**
 	 * 
 	 * @param multa
@@ -113,6 +120,7 @@ public class Locadora {
 		System.out.println("Pelo atraso, deverá pagar R$ " + multa +"\n");
 	}
 
+	
 	/**
 	 * Este método realiza a conversão das datas recebendo um String e retornando um Date
 	 * @param dataTexto
